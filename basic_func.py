@@ -31,11 +31,16 @@ def load_unicef_data(fname=""):
     features = data.axes[1][:]
     # transform to list
     features = features.tolist()
-    listing_id = data.axes[0][1:]
+    listing_id = data.axes[0][:]
     values = data.values[:, :]
 
     return (listing_id, features, values, data)
 
+def generate_new_json(id, features, values, filename):
+    data = pd.DataFrame(values, columns = features, index = id)
+    data.to_json(filename)
+
+    return data
 
 def load_by_data(data):
     listing_id = data.axes[0][1:]
@@ -53,7 +58,6 @@ def not_digit_and_underline(a):
 
 
 def deal_with_text(features, values, feature_name, min_df=0):
-    stop_words = []
     # get index first
     p = features.index(feature_name)
     corpus = values[:, p]

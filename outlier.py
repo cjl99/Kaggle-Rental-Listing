@@ -1,22 +1,16 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import time
 import basic_func as func
 
 # -----------------outlier--------------
-train_df = pd.read_json("./mid_train.json")
 # find listing_id is unique or not
-(listing_id, features, values) = func.load_unicef_data()
-# p = features.index("listing_id")
-# listing = values[:, p]
-# list_set = set(listing)
-# print(len(list_set))
-# print(listing.shape[0])
+(listing_id, features, values, train_df) = func.load_unicef_data("mid_train.json")
+print(train_df.shape)
 
 # drop outlier of high price(>20000)
-print(train_df)
+# print(train_df)
 ulimit = 20000  # find out from figure in PART1
 outlier_price = train_df.loc[train_df["price"] > ulimit, ["listing_id"]]
 print("The number of outliers in price: " + str(outlier_price.shape[0]))
@@ -77,9 +71,10 @@ plt.scatter(range(train_df['bedrooms'].shape[0]), np.sort(train_df['bedrooms']))
 plt.xlabel('index', fontsize=12)
 plt.ylabel('bedrooms', fontsize=12)
 plt.show()
+print("The number of outliers in bathroom: " + str(0))
 
-func.generate_new_json(listing_id, features, values, 'final_train.json')
-data.to_json(filename)
+print(train_df.shape)
+train_df.to_json("final_train.json")
 
 
 # ------------------

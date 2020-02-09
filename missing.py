@@ -1,11 +1,9 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import basic_func as func
 
-(listing_id, features, values) = func.load_unicef_data()
-train_df = pd.read_json("train.json")
+(listing_id, features, values, train_df) = func.load_unicef_data("train.json")
 
 # record the number of missing values
 # initialize the counts
